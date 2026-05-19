@@ -1,1 +1,546 @@
+.term-content {
+    min-height: 300px; 
+}
+/* PREVENT PAGE FROM SCROLLING HORIZONTALLY */
+body {
+    overflow-x: hidden;
+}
 
+/* MAKE SURE CONTENT DOESN'T OVERFLOW */
+.content {
+    overflow-x: hidden;
+}
+/*attednace/ students data*/
+.top-info-row {
+    display: flex;
+    gap: 10px;
+}
+.top-info-row .placeholder-box {
+    flex: 1;
+}
+/*==CLASS attendance==*/
+.attendance-chart-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-wrapper {
+    position: relative;
+    width: 160px;
+    height: 160px;
+}
+
+.attendance-chart {
+    transform: rotate(-90deg);
+}
+
+.track {
+    fill: none;
+    stroke: #eee;
+    stroke-width: 10;
+}
+
+.present-ring,
+.late-ring,
+.absent-ring {
+    fill: none;
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: 0.5s ease;
+}
+
+.present-ring {
+    stroke: #28a745;
+}
+
+.late-ring {
+    stroke: #fd7e14;
+}
+
+.absent-ring {
+    stroke: #dc3545;
+}
+
+.center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.center-text div {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.legend {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.legend div {
+    display: flex;
+    justify-content: space-between;
+    width: 140px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.green { background: #28a745; }
+.orange { background: #fd7e14; }
+.red { background: #dc3545; }
+
+
+
+
+/*==ADD CLASSROOM BUTTONS==*/
+/* SCROLL CONTAINER*/
+.classroom-row-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding-bottom: 10px;
+    max-width: 100%;
+}
+/* FLEX ROW */
+.classroom-row {
+    display: flex;
+    gap: 10px;
+    width: max-content; /* keeps items in one line */
+}
+/* CLASS BUTTON */
+.class-btn {
+    min-width: 140px;
+    max-width: 140px;
+    height: 80px;
+    background-color: #2f63b3;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: left;
+    flex-shrink: 0;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.class-btn:hover {
+    background-color: #244c8a;
+}
+/* TITLE (truncate) */
+.class-title {
+    font-weight: bold;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* YEAR TEXT */
+.class-year {
+    font-size: 12px;
+    opacity: 0.8;
+}
+/* ADD BUTTON */
+.add-class-btn {
+    min-width: 80px;
+    height: 80px;
+    font-size: 24px;
+    border-radius: 10px;
+    border: 2px dashed #2f63b3;
+    background: transparent;
+    color: #2f63b3;
+    flex-shrink: 0;
+}
+.add-class-btn:hover {
+    background-color: #2f63b3;
+    color: white;
+}
+/* SCROLLBAR (optional nice look) */
+.classroom-row-wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+.classroom-row-wrapper::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+/*==CLASSROOM CONTENT==*/
+/* CLASS CONTENT CARD */
+.class-content-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+/* HEADER INFO */
+.class-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-weight: bold;
+}
+.class-description {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+/* TWO COLUMN LAYOUT */
+.class-body {
+    display: flex;
+    gap: 15px;
+}
+.left-col {
+    flex: 2;
+}
+.right-col {
+    flex: 1;
+}
+/* PLACEHOLDERS */
+.placeholder-box {
+    background: #f5f5f5;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #888;
+}
+
+/*==SCHEDULE==*/
+/* SCHEDULE BOX */
+.schedule-box {
+    /*background: #f5f5f5;*/
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+}
+/* FORCE ONE LINE */
+.days-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+}
+/* KEEP EACH DAY INLINE */
+.days-container .form-check {
+    margin: 0;
+    white-space: nowrap;
+}
+
+/*==DELETE CLASS BUTTON==*/
+/* DELETE WRAPPER */
+.delete-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+/*==DELETE BUTTON==*/
+.delete-btn {
+    background-color: #f8d7da; /* pale red */
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: #842029;
+    font-size: 14px;
+    transition: 0.2s;
+}
+/* HOVER EFFECT (still subtle) */
+.delete-btn:hover {
+    background-color: #f1aeb5;
+    color: #58151c;
+}
+/*==EDIT CLASS BUTTON==*/
+.edit-btn {
+    background-color: #d1e7dd; /* pale green */
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: #0f5132;
+    font-size: 14px;
+    transition: 0.2s;
+}
+.edit-btn:hover {
+    background-color: #a3cfbb;
+    color: #0a3622;
+}
+/* keep buttons aligned */
+.delete-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+/*==ENROLL STUDENT BUTTON==*/
+.side-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+}
+.enroll-btn {
+    background: none;
+    border: none;
+    color: #2f63b3;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px;
+}
+.enroll-btn i {
+    font-size: 16px;
+}
+.enroll-btn:hover {
+    text-decoration: underline;
+}
+/*STUDENT ENROLLED TABLE*/
+.student-panel {
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* FIX HEIGHT = SCROLL AFTER ~10 ROWS */
+.student-table-wrapper {
+    max-height: 350px;   /* controls "10 rows feel" */
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 6px;
+}
+
+/* clean table look */
+.student-table {
+    margin-bottom: 0;
+}
+
+.student-table tbody tr {
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.student-table tbody tr:hover {
+    background-color: #f1f5ff;
+}
+
+/* sticky header */
+.student-table thead th {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 2;
+    cursor: pointer;
+}
+/*enroll a student button==*/
+/* EDIT BUTTON */
+.student-edit-btn {
+    background-color: #d1e7dd; /* pale green */
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: #0f5132;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.student-edit-btn:hover {
+    background-color: #a3cfbb;
+    color: #0a3622;
+}
+
+/* DELETE BUTTON */
+.student-delete-btn {
+    background-color: #f8d7da; /* pale red */
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: #842029;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.student-delete-btn:hover {
+    background-color: #f1aeb5;
+    color: #58151c;
+}
+/*enrolled student table acts*/
+.activity-table-scroll {
+    max-height: 240px; /* ~6 rows */
+    overflow-y: auto;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+}
+
+/* optional: keep header visible while scrolling */
+.activity-table-scroll thead th {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 2;
+}
+
+
+
+/*==PERIOD==*/
+.grade-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+.grade-tab {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    background: #f1f1f1;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.grade-tab:hover {
+    background: #e2e2e2;
+}
+.grade-tab.active {
+    background: #0d6efd;
+    color: white;
+}
+.term-content {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    min-height: 200px;
+    background: #fff;
+}
+.grade-tab-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+/* TAB BAR */
+.grade-tabs {
+    display: flex;
+    gap: 6px;
+}
+/*add act*/
+.add-activity-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: #2f63b3;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 4px 6px;
+    transition: 0.2s;
+}
+.add-activity-btn:hover {
+    text-decoration: underline;
+}
+/*==PERIOD TABLE===*/
+.activity-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.activity-table-wrapper {
+    max-height: 300px; /* ~7 rows */
+    overflow-y: auto;
+}
+/* truncate long text */
+.truncate {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* clickable table rows */
+#activityTableBody tr {
+    cursor: pointer;
+}
+/* sortable column header */
+th[onclick] {
+    cursor: pointer;
+}
+/*modal act*/
+.edit-btn {
+    background-color: #d1e7dd;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: #0f5132;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.edit-btn:hover {
+    background-color: #a3cfbb;
+    color: #0a3622;
+}
+
+.delete-btn {
+    background-color: #f8d7da;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: #842029;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.delete-btn:hover {
+    background-color: #f1aeb5;
+    color: #58151c;
+}
+.editScore {
+    width: 70px;
+}
+
+/*graph for total students*/
+.student-count-card {
+    background: #E9D8FD; /* light purple */
+    color: #4C1D95;
+}
+.top-info-row {
+    display: flex;
+    gap: 16px;
+}
+.attendance-chart-box,
+.student-count-card {
+    flex: 1;         
+    min-width: 0;   
+}
+.student-label {
+    font-size: 1.3rem;
+}
+#studentCount {
+    font-size: 3.5rem;
+    line-height: 1;
+}
+.student-icon {
+    font-size: 4rem;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .class-body {
+        flex-direction: column;
+    }
+    .modal-dialog {
+        margin: 10px;
+    }
+
+    .modal-content {
+        border-radius: 12px;
+    }
+}
