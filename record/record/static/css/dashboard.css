@@ -1,1 +1,201 @@
-
+‎body {
+‎    font-family: Arial, Helvetica, sans-serif;
+‎}
+‎
+‎/* MAIN LAYOUT */
+‎.dashboard-container {
+‎    display: flex;
+‎    gap: 15px;
+‎}
+‎
+‎/* COLUMNS */
+‎.left-column {
+‎    flex: 2;
+‎    display: flex;
+‎    flex-direction: column;
+‎    gap: 15px;
+‎}
+‎
+‎.right-column {
+‎    flex: 1;
+‎    display: flex;
+‎    flex-direction: column;
+‎    gap: 15px;
+‎}
+‎
+‎/* BOX STYLE */
+‎.box {
+‎    background: #f5f5f5;
+‎    border-radius: 10px;
+‎    padding: 20px;
+‎    min-height: 120px;
+‎}
+‎
+‎/* TOP BOXES */
+‎.top-box {
+‎    flex: 0 0 auto;
+‎}
+‎
+‎/* SCROLLABLE BOXES */
+‎.scroll-box {
+‎    height: 250px;              /* fixed height */
+‎    overflow-y: auto;           /* scroll inside only */
+‎}
+‎
+‎/* SCROLLBAR STYLE (optional) */
+‎.scroll-box::-webkit-scrollbar {
+‎    width: 6px;
+‎}
+‎
+‎.scroll-box::-webkit-scrollbar-thumb {
+‎    background: #ccc;
+‎    border-radius: 10px;
+‎}
+‎
+‎/*upcoming events*/
+‎.right-column .scroll-box {
+‎    max-height: 400px;
+‎    display: flex;
+‎    flex-direction: column;
+‎    background: #fff7f0;
+‎    border-radius: 12px;
+‎    padding: 10px;
+‎}
+‎
+‎/* Header */
+‎.right-column .reminder-header {
+‎    font-weight: 600;
+‎    padding: 8px 10px;
+‎    color: #ff7a00;
+‎}
+‎
+‎/* Scrollable list */
+‎.right-column .reminder-list {
+‎    overflow-y: auto;
+‎    max-height: 320px;
+‎    padding-right: 5px;
+‎}
+‎
+‎/* Individual item */
+‎.right-column .reminder-item {
+‎    display: flex;
+‎    align-items: center;
+‎    gap: 10px;
+‎    padding: 10px;
+‎    margin-bottom: 8px;
+‎    border-radius: 10px;
+‎    background: #fff;
+‎    transition: 0.2s;
+‎    cursor: pointer;
+‎}
+‎
+‎.right-column .reminder-item:hover {
+‎    background: #ffe8d6;
+‎}
+‎
+‎/* Icon */
+‎.right-column .reminder-icon {
+‎    background: #ffedd5;
+‎    color: #ff7a00;
+‎    font-size: 18px;
+‎    padding: 10px;
+‎    border-radius: 50%;
+‎}
+‎
+‎/* Content */
+‎.right-column .reminder-content .title {
+‎    font-weight: 500;
+‎    font-size: 14px;
+‎}
+‎
+‎.right-column .reminder-content .date {
+‎    font-size: 12px;
+‎    color: #888;
+‎}
+‎
+‎/* Empty state */
+‎.right-column .empty {
+‎    text-align: center;
+‎    padding: 20px;
+‎    color: #aaa;
+‎}
+‎
+‎
+‎/*total classes/ students*/
+‎.dashboard-card {
+‎    color: #333;
+‎}
+‎
+‎/* BLUE (Classes) */
+‎.bg-blue {
+‎    background: #DBEAFE;
+‎    color: #1E3A8A;
+‎}
+‎
+‎/* PINK (Students) */
+‎.bg-pink {
+‎    background: #FCE7F3;
+‎    color: #9D174D;
+‎}
+‎
+‎.dashboard-card i {
+‎    opacity: 0.7;
+‎}
+‎/*top students*/
+‎.top-student-card {
+‎    background: #F8FAFC;
+‎    border-radius: 12px;
+‎    padding: 10px 12px;
+‎    display: flex;
+‎    justify-content: space-between;
+‎    align-items: center;
+‎    transition: 0.2s;
+‎}
+‎
+‎.top-student-card:hover {
+‎    transform: translateY(-2px);
+‎    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+‎}
+‎.grade-badge {
+‎    font-weight: bold;
+‎    padding: 4px 10px;
+‎    border-radius: 20px;
+‎    background: #DCFCE7;
+‎    color: #166534;
+‎}
+‎.top-students-wrapper {
+‎    max-height: 300px; /* ~5 students */
+‎    overflow-y: auto;
+‎    padding-right: 5px;
+‎}
+‎
+‎/* optional: nicer scrollbar */
+‎.top-students-wrapper::-webkit-scrollbar {
+‎    width: 6px;
+‎}
+‎
+‎.top-students-wrapper::-webkit-scrollbar-thumb {
+‎    background: #ccc;
+‎    border-radius: 10px;
+‎}
+‎/*attendance graph*/
+‎canvas {
+‎    background: #fff;
+‎    border-radius: 10px;
+‎    padding: 10px;
+‎}
+‎
+‎
+‎
+‎
+‎/* RESPONSIVE */
+‎@media (max-width: 768px) {
+‎    .dashboard-container {
+‎        flex-direction: column;
+‎    }
+‎
+‎    .scroll-box {
+‎        height: 200px;
+‎    }
+‎}
+‎
