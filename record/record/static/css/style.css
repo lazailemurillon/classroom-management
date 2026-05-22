@@ -1,1 +1,41 @@
+/*==SIGNUP==*/
+.btn-signup {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #d9d9d9;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+.btn-signup:hover {
+    background: #c7c7c7;
+}
+/* slightly taller card for more fields */
+.signup-card {
+    max-width: 420px;
+}
 
+
+/* Responsive */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 30px 20px;
+    }
+
+    .login-card h1 {
+        font-size: 22px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .signup-card {
+        padding: 25px 18px;
+    }
+}
