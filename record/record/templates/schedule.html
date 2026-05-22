@@ -1,1 +1,96 @@
+{% extends 'main_page.html' %}
+{% load static %}
 
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/schedule.css' %}">
+
+<h1 class="mb-4">Calendar Page</h1>
+
+<div class="schedule-container">
+
+    <!-- LEFT COLUMN -->
+    <div class="left-column">
+        <div class="box">
+            <div class="calendar-header">
+                <button id="prevMonth">&lt;</button>
+                <h2 id="monthYear"></h2>
+                <button id="nextMonth">&gt;</button>
+             </div>
+
+            <div class="calendar-grid" id="calendar"></div>
+
+            <!-- Floating Add Button -->
+            <button id="addEventBtn" class="floating-btn">+</button>
+        </div>
+
+        <!-- MODAL -->
+        <div class="modal fade" id="eventModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <label class="form-label">Date</label>
+                    <input type="date" class="form-control mb-2" id="eventDate">
+
+                    <label class="form-label">Title</label>
+                    <input type="text" class="form-control" id="eventTitle" placeholder="Enter task">
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveEvent()">Save</button>
+                </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="viewEventsModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="viewDateTitle">Events</h5>
+                        <button type="button" class="btn-close btn-close-lg" data-bs-dismiss="modal"></button>
+                    </div>
+                <div class="modal-body">
+            <div id="allEventsContainer"></div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="right-column">
+
+        <div class="box scroll-box">
+            <div class="reminder-header">
+                <span>Reminders</span>
+            </div>
+
+            <div id="reminderList" class="reminder-list">
+                <!-- JS will inject here -->
+            </div>
+        </div>
+
+        <!--div class="box scroll-box">
+            Bottom Scrollable Placeholder
+        </div-->
+
+    </div>
+
+</div>
+
+<script src="{% static 'js/schedule.js' %}"></script>
+
+{% endblock %}
