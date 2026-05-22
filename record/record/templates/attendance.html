@@ -1,1 +1,8 @@
+{% extends 'main_page.html' %} {% load static %} {% block content %}
+Attendance Page
 
+ {% for classroom in classrooms %} {% empty %} {% endfor %}
+Class Name	Schedule
+{{ classroom.name }}	{{ classroom.schedule }}
+No classes found
+{% endblock %}
