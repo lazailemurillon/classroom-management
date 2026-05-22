@@ -1,1 +1,97 @@
+{% extends 'main_page.html' %}
+{% load static %}
 
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/attendance.css' %}">
+<input type="hidden" name="csrfmiddlewaretoken" id="csrfToken" value="{{ csrf_token }}">
+
+<h1 class="mb-4">Attendance Page</h1>
+
+<!-- ================= FIRST TABLE ================= -->
+<div id="classTableSection">
+
+    <input type="text" id="searchClass" class="form-control mb-2" placeholder="Search class...">
+
+    <table class="table table-hover" id="classTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable('classTable', 0)">
+                    Class Name <i class="bi bi-arrow-down-up"></i>
+                </th>
+                <th>Schedule</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for classroom in classrooms %}
+            <tr class="clickable-row" data-class-id="{{ classroom.id }}">
+                <td>{{ classroom.name }}</td>
+                <td>{{ classroom.schedule }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2">No classes found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+<!-- ================= SECOND TABLE ================= -->
+<div id="studentTableSection" style="display:none;">
+
+    <button class="btn btn-secondary mb-2" id="backBtn">← Back</button>
+
+    <!-- TABS -->
+    <ul class="nav mb-3" id="attendanceTabs">
+        <li class="nav-item"><a class="nav-link active" data-period="prelim" href="#">Prelim</a></li>
+        <li class="nav-item"><a class="nav-link" data-period="midterm" href="#">Midterm</a></li>
+        <li class="nav-item"><a class="nav-link" data-period="prefinal" href="#">Prefinal</a></li>
+        <li class="nav-item"><a class="nav-link" data-period="final" href="#">Final</a></li>
+    </ul>
+
+    <!-- SEARCH + FILTER + BUTTON -->
+    <div class="d-flex mb-2 gap-2 flex-wrap align-items-center">
+        <input type="text" id="searchStudent" class="form-control" placeholder="Search student...">
+
+        <select id="dateFilter" class="form-select" style="max-width:200px;">
+            <option value="">All Dates</option>
+        </select>
+
+        <button class="btn btn-primary" id="newAttendanceBtn" style="width:150px; height:40px; font-size:12px; white-space:normal;line-height:1.1;">Take New Attendance</button>
+    </div>
+
+    <!-- TABLE -->
+    <table class="table table-hover" id="studentTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable('studentTable', 0)">
+                    Name <i class="bi bi-arrow-down-up"></i>
+                </th>
+                <th id="dateColumn" onclick="sortTable('studentTable', 1)">
+                    Date/Time <i class="bi bi-arrow-down-up"></i>
+                </th>
+                <th id="statusColumn">Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- VIEW MODE ACTIONS (DELETE ONLY) -->
+    <button class="btn btn-danger" id="deleteAttendance" disabled>
+        Delete
+    </button>
+
+    <!-- TAKE ATTENDANCE MODE ACTIONS -->
+    <div class="text-end mt-2" id="attendanceActions" style="display:none;">
+        <button class="btn btn-success" id="saveAttendance">Save</button>
+        <button class="btn btn-danger" id="cancelAttendance">Cancel</button>
+    </div>
+    
+</div>
+
+<script src="{% static 'js/attendance.js' %}"></script>
+
+{% endblock %}
