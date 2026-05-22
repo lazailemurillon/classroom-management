@@ -1,1 +1,82 @@
+{% extends 'main_page.html' %}
+{% load static %}
 
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<h1 class="mb-4">Dashboard Page</h1>
+
+<div class="dashboard-container">
+
+    <!-- LEFT COLUMN -->
+    <div class="left-column">
+
+        <div class="box top-box">
+
+    <div class="fw-bold mb-2">Attendance Analytics</div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <canvas id="attendanceTrendChart"></canvas>
+        </div>
+        <div class="col-md-4">
+            <canvas id="attendanceBarChart"></canvas>
+
+            <div class="mt-3 small">
+                <div><strong>Worst Day:</strong> <span id="worstDay">--</span></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+        <div class="fw-bold mb-2">Top Students</div>
+        <div class="top-students-wrapper">
+            <div id="topStudentsList" class="d-flex flex-column gap-2"></div>
+        </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="right-column">
+
+            <div class="d-flex gap-3">
+
+                <!-- TOTAL CLASSES -->
+                <div class="dashboard-card bg-blue p-3 rounded-4 flex-fill d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="small text-muted">Classes</div>
+                        <div id="totalClasses" class="fw-bold fs-3">--</div>
+                    </div>
+                    <i class="bi bi-easel fs-1"></i>
+                </div>
+
+                <!-- TOTAL STUDENTS -->
+                <div class="dashboard-card bg-pink p-3 rounded-4 flex-fill d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="small text-muted">Students</div>
+                        <div id="totalStudents" class="fw-bold fs-3">--</div>
+                    </div>
+                    <i class="bi bi-people fs-1"></i>
+                </div>
+
+            </div>
+
+        <div class="box scroll-box">
+            <div class="reminder-header">
+                <span>Reminders</span>
+            </div>
+
+            <div id="reminderList" class="reminder-list">
+                <!-- JS will inject here -->
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}
