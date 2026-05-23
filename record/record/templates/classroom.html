@@ -1,1 +1,328 @@
+{% extends 'main_page.html' %}
+{% load static %}
 
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/classroom.css' %}">
+
+<h1 class="mb-4">Classroom Page</h1>
+
+<!-- BUTTON ROW -->
+<div class="classroom-row-wrapper">
+    <div class="classroom-row" id="classroomRow">
+
+        <!-- ADD BUTTON -->
+        <button class="add-class-btn" data-bs-toggle="modal" data-bs-target="#addClassModal">
+            <i class="bi bi-plus-lg"></i>
+        </button>
+
+    </div>
+</div>
+
+<!-- CONTENT AREA -->
+<div id="classContentArea" class="mt-4">
+    <div class="placeholder-text text-muted">
+        Select a class to view details.
+    </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal fade" id="addClassModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Classroom</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+            <form id="classForm">
+                <input type="text" class="form-control mb-2" placeholder="Class Name" id="className" required>
+                <input type="text" class="form-control mb-2" placeholder="Year" id="classYear">
+                <input type="text" class="form-control mb-2" placeholder="Room" id="classRoom">
+
+                <div class="mb-2 schedule-box">
+                <label class="form-label text-muted">Schedule</label>
+                <div class="days-container">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input day-checkbox" type="checkbox" value="Mon"> Mon
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input day-checkbox" type="checkbox" value="Tue"> Tue
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input day-checkbox" type="checkbox" value="Wed"> Wed
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input day-checkbox" type="checkbox" value="Thu"> Thu
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input day-checkbox" type="checkbox" value="Fri"> Fri
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input day-checkbox" type="checkbox" value="Sat"> Sat
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input day-checkbox" type="checkbox" value="Sun"> Sun
+                    </div>
+                </div>
+                <!-- TIME -->
+                <div class="row mt-2">
+                    <div class="col">
+                        <input type="time" class="form-control" id="startTime">
+                    </div>
+                    <div class="col">
+                        <input type="time" class="form-control" id="endTime">
+                    </div>
+                </div>
+            </div>
+
+                <textarea class="form-control mt-3" placeholder="Description" id="classDesc"></textarea>
+            </form>
+
+        </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" id="saveClass">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODAL LIST STUDENT-->
+<div class="modal fade" id="studentModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Student Info</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- TOP ROW -->
+        <div class="row mb-3">
+          <div class="col-8">
+            <div class="p-2 border rounded">
+              <strong>Name</strong>
+              <div id="studentModalName"></div>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="p-2 border rounded text-center">
+              <strong>Grade</strong>
+              <div id="studentModalGrade">--</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM ROW -->
+        <div class="row">
+
+          <div class="col-8">
+            <div class="p-2 border rounded">
+              <strong>Activities</strong>
+                  <div>
+                    <input type="text" id="studentActSearch" class="form-control form-control-sm mb-2" placeholder="Search activity...">
+
+                    <select id="studentActFilter" class="form-select form-select-sm mb-2">
+                        <option value="">All</option>
+                        <option value="prelim">Prelim</option>
+                        <option value="midterm">Midterm</option>
+                        <option value="prefinal">Pre-Final</option>
+                        <option value="final">Final</option>
+                    </select>
+
+                    <div class="activity-table-scroll">
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th onclick="sortStudentActivities()">Activity</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentActivitiesTable"></tbody>
+                        </table>
+                        <tfoot>
+                          <tr>
+                              <td colspan="2"><i>Prelim:</i> <span id="gradePrelim">--</span></td>
+                          </tr>
+                          <tr>
+                              <td colspan="2"><i>Midterm:</i> <span id="gradeMidterm">--</span></td>
+                          </tr>
+                          <tr>
+                              <td colspan="2"><i>Prefinal:</i> <span id="gradePrefinal">--</span></td>
+                          </tr>
+                          <tr>
+                              <td colspan="2"><i>Final:</i> <span id="gradeFinal">--</span></td>
+                          </tr>
+                      </tfoot>
+                    </div>
+
+                  </div>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="p-2 border rounded text-center">
+              <strong>Attendance</strong>
+              <div id="studentModalAttendance">--%</div>
+            </div>
+          </div>
+          
+        </div>
+
+        <!-- EDIT FORM (HIDDEN BY DEFAULT) -->
+        <div id="editStudentForm" class="mt-3 d-none">
+          <div class="mb-2">
+            <label class="form-label">First Name</label>
+            <input type="text" id="editFirstName" class="form-control">
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Last Name</label>
+            <input type="text" id="editLastName" class="form-control">
+          </div>
+        </div>
+        <!-- EDIT ACTION BUTTONS -->
+        <div id="editActions" class="d-none d-flex justify-content-end gap-2 mt-3">
+          <button class="btn btn-secondary" onclick="cancelEditStudent()">
+            Cancel
+          </button>
+          <button class="btn btn-primary" onclick="saveEditStudent()">
+            Save
+          </button>
+        </div>
+        <!-- NORMAL ACTION BUTTONS -->
+        <div id="normalActions" class="d-flex justify-content-end gap-2 mt-3">
+          <button type="button" class="student-edit-btn" onclick="enableEditStudent()">
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button type="button" class="student-delete-btn" onclick="deleteStudent()">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--ADD/ enroll a student-->
+<div class="modal fade" id="enrollStudentModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Enroll Student</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <form id="enrollForm">
+
+          <input type="text" class="form-control mb-2"
+                 id="studentFirstName"
+                 placeholder="First Name" required>
+
+          <input type="text" class="form-control mb-2"
+                 id="studentLastName"
+                 placeholder="Last Name" required>
+          
+          <div class="mt-3">
+            <label class="form-label">Add to another class</label>
+            <select id="otherClassSelect" class="form-select mb-2">
+              <option value="">Select class</option>
+            </select>
+            <div id="selectedClassesList" class="d-flex flex-wrap gap-2"></div>
+          </div>
+
+        </form>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" onclick="saveStudent()">Save</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--ADD ACTIVITY MODAL-->
+<div class="modal fade" id="addActivityModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Add Activity</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <form id="activityForm">
+
+          <!-- Period -->
+          <select class="form-select mb-2" id="activityPeriod" required>
+            <option value="">Select Period</option>
+            <option value="prelim">Prelim</option>
+            <option value="midterm">Midterm</option>
+            <option value="prefinal">Pre-Final</option>
+            <option value="final">Final</option>
+          </select>
+
+          <!-- Activity Name -->
+          <input type="text" class="form-control mb-2" id="activityName" placeholder="Activity Name" required>
+
+          <!-- Points -->
+          <input type="number" class="form-control mb-2" id="activityPoints" placeholder="Points" min="0" required>
+
+          <!-- Type -->
+          <select class="form-select mb-2" id="activityType" required>
+            <option value="">Select Type</option>
+            <option value="quiz">Quiz</option>
+            <option value="exam">Exam</option>
+            <option value="recitation">Recitation</option>
+            <option value="activity">Activity</option>
+          </select>
+
+        </form>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" onclick="saveActivity()">Save</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--period modal-->
+<div class="modal fade" id="activityModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Activity</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="activityModalContent"></div>
+    </div>
+  </div>
+</div>
+
+{{ classes|json_script:"class-data" }}
+<script>
+    let classes = JSON.parse(document.getElementById('class-data').textContent);
+</script>
+
+<script src="{% static 'js/classroom.js' %}"></script>
+
+{% endblock %}
